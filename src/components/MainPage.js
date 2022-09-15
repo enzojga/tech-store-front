@@ -98,6 +98,8 @@ const ProductInfo = styled.div`
 const ProductImage = styled.div`
     width: 750px;
     height: 500px;
-    background-color: white;
     background-image: url(${props => props.image});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 `
