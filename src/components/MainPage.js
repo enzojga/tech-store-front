@@ -24,7 +24,7 @@ export default function MainPage() {
                         <h2>Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande</h2>
                         <h3>RS 9.99</h3>
                     </ProductInfo>
-                    <ProductImage>
+                    <ProductImage image={`https://picsum.photos/id/${i}/200/300`}>
                     </ProductImage>
                 </MainProduct>
             </SwiperSlide>
@@ -99,4 +99,5 @@ const ProductImage = styled.div`
     width: 750px;
     height: 500px;
     background-color: white;
+    background-image: url(${props => props.image});
 `
