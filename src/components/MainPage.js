@@ -1,7 +1,30 @@
 import { Header,Content } from "../themes/themes";
 import styled from "styled-components";
+import {Swiper, SwiperSlide} from "swiper/react";
+import SwiperCore, {Navigation,Pagination} from "swiper";
+import "swiper/swiper-bundle.css"
+
+SwiperCore.use([Navigation,Pagination])
 
 export default function MainPage(){
+
+    const slides = [];
+    for(let i = 0; i < 5; i++){
+        slides.push(
+            <SwiperSlide>
+                <MainProduct>
+                    <ProductInfo>
+                        <h1>Nome do produto</h1>
+                        <h2>Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande</h2>
+                        <h3>RS 9.99</h3>
+                    </ProductInfo>
+                    <ProductImage>
+                    </ProductImage>
+                </MainProduct>
+            </SwiperSlide>
+        )
+    }
+
     return(
         <>
             <Header>
@@ -17,15 +40,9 @@ export default function MainPage(){
                 </div>
             </Header>
             <Content color={"#001845"}>
-                <MainProduct>
-                    <ProductInfo>
-                        <h1>Nome do produto</h1>
-                        <h2>Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande</h2>
-                        <h3>RS 9.99</h3>
-                    </ProductInfo>
-                    <ProductImage>
-                    </ProductImage>
-                </MainProduct>
+                <Swiper navigation pagination>
+                    {slides}
+                </Swiper>
             </Content>
         </>
     )
