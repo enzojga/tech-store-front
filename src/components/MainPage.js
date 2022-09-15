@@ -1,15 +1,21 @@
-import { Header,Content } from "../themes/themes";
+import { Header, Content } from "../themes/themes";
+import { useState } from "react";
 import styled from "styled-components";
-import {Swiper, SwiperSlide} from "swiper/react";
-import SwiperCore, {Navigation,Pagination} from "swiper";
-import "swiper/swiper-bundle.css"
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Pagination, Thumbs, Autoplay } from "swiper";
+import "swiper/swiper-bundle.css";
+import 'swiper/modules/navigation/navigation';
+import 'swiper/modules/pagination/pagination';
+import '../themes/style.css'
 
-SwiperCore.use([Navigation,Pagination])
+SwiperCore.use([Navigation, Pagination, Thumbs, Autoplay])
 
-export default function MainPage(){
+export default function MainPage() {
+
+    const [thumbSwiper, setThumbSwiper] = useState(null);
 
     const slides = [];
-    for(let i = 0; i < 5; i++){
+    for (let i = 0; i < 5; i++) {
         slides.push(
             <SwiperSlide>
                 <MainProduct>
@@ -24,8 +30,16 @@ export default function MainPage(){
             </SwiperSlide>
         )
     }
+    const thumb = [];
+    for (let i = 0; i < 5; i++) {
+        thumb.push(
+            <SwiperSlide>
+                <img src={`https://picsum.photos/id/${i}/200/300`} />
+            </SwiperSlide>
+        )
+    }
 
-    return(
+    return (
         <>
             <Header>
                 <h2>Tech Store</h2>
@@ -40,8 +54,11 @@ export default function MainPage(){
                 </div>
             </Header>
             <Content color={"#001845"}>
-                <Swiper navigation pagination>
+                <Swiper navigation pagination={{ clickable: true }} loop autoplay thumbs={{ swiper: thumbSwiper }} >
                     {slides}
+                </Swiper>
+                <Swiper onSwiper={setThumbSwiper} slidesPerView={3} loop style={{maxWidth:"650px",position:"absolute",bottom:0,right:"25px",margin:"0 0 20px 0"}}>
+                    {thumb}
                 </Swiper>
             </Content>
         </>

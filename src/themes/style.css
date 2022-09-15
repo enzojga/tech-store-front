@@ -1,0 +1,21 @@
+.swiper-container{
+    width: 100%;
+}
+
+.swiper-pagination{
+    bottom: 0;
+}
+
+.swiper-warper{
+    padding-inline-start: 0;
+}
+
+.swiper-pagination-bullet{
+    width: 15px;
+    height: 15px;
+    background-color: white;
+}
+
+.swiper-pagination-bullet-active{
+    background-color: red;
+}

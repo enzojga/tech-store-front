@@ -31,6 +31,11 @@ const Content = styled.div`
     background-color: ${props => props.color};
     display: flex;
     align-items: center;
+    position: relative;
+    img{
+        width: 200px;
+        height: 200px;
+    }
 `
 
 
