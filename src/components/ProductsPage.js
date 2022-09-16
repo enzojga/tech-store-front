@@ -100,7 +100,7 @@ const CategoryItens = styled.div`
         display: flex;
     }
     div{
-        width: 75%;
+        width: 1400px;
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
