@@ -1,40 +1,48 @@
 import { Header, Content } from "../themes/themes";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Thumbs, Autoplay } from "swiper";
+import axios from "axios";
 import "swiper/swiper-bundle.css";
 import 'swiper/modules/navigation/navigation';
 import 'swiper/modules/pagination/pagination';
-import '../themes/style.css'
+import '../themes/style.css';
 
 SwiperCore.use([Navigation, Pagination, Thumbs, Autoplay])
 
 export default function MainPage() {
 
     const [thumbSwiper, setThumbSwiper] = useState(null);
+    const [products, setProducts] = useState([]);
 
     const slides = [];
-    for (let i = 0; i < 5; i++) {
+
+    useEffect(() =>{
+        axios.get("http://localhost:5000/getProduct").then(p => setProducts(p.data));
+    },[]);
+    console.log(products)
+
+    for (let i = 0; i < products.length; i++) {
         slides.push(
             <SwiperSlide>
                 <MainProduct>
                     <ProductInfo>
-                        <h1>Nome do produto</h1>
-                        <h2>Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande Descrição enorme de grande</h2>
-                        <h3>RS 9.99</h3>
+                        <h1>{products[i].name}</h1>
+                        <h2>{products[i].description}</h2>
+                        <h3>{(products[i].price / 100).toFixed(2)}</h3>
                     </ProductInfo>
-                    <ProductImage image={`https://picsum.photos/id/${i}/200/300`}>
+                    <ProductImage image={products[i].image}>
                     </ProductImage>
                 </MainProduct>
             </SwiperSlide>
         )
     }
     const thumb = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < products.length; i++) {
         thumb.push(
             <SwiperSlide>
-                <img src={`https://picsum.photos/id/${i}/200/300`} />
+                <img src={products[i].image} />
             </SwiperSlide>
         )
     }
@@ -57,7 +65,7 @@ export default function MainPage() {
                 <Swiper navigation pagination={{ clickable: true }} loop autoplay thumbs={{ swiper: thumbSwiper }} >
                     {slides}
                 </Swiper>
-                <Swiper onSwiper={setThumbSwiper} slidesPerView={3} loop style={{maxWidth:"650px",position:"absolute",bottom:0,right:"25px",margin:"0 0 20px 0"}}>
+                <Swiper onSwiper={setThumbSwiper} slidesPerView={products.length} style={{maxWidth:"650px",position:"absolute",bottom:0,right:"25px",margin:"0 0 20px 0"}}>
                     {thumb}
                 </Swiper>
             </Content>
