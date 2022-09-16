@@ -1,38 +1,32 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {ThreeDots} from 'react-loader-spinner';/* 
-import { registerUser } from "../../service/api"; *//* 
+import {ThreeDots} from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; */
+import 'react-toastify/dist/ReactToastify.css'; 
+import { postSignIn } from "../../Service/api";
 
 export default function SignIn (){
 
     const [email,setEmail]= useState('');
     const [password,setPassword]= useState('');
-    const [name,setName]= useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const navigate=useNavigate();
     const [isloading, setIsLoading] =useState (false)
     console.log("comecei ")
     
- /*    function confirmLogin(e){
-        if(confirmPassword !== password){
-             alert('Senhas são diferentes, tente novamente')
-    
-        }else{
+    function confirmLogin(e){
+        
         e.preventDefault();
         setIsLoading(true)
     
         const body = {
             email: email,
-            name: name,
             password: password
         }
     
-        registerUser(body)
+        postSignIn(body)
             .then(() => {
-                toast.success("Tudo certo, vamos la, Faça seu login :)!!");
+                toast.success("Tudo certo! Boas compras!! :)");
                 setTimeout(()=>{
                     navigate('/');
                 },2000) 
@@ -41,26 +35,25 @@ export default function SignIn (){
                 setIsLoading(false)
                 console.error(err);
                 if(err.status !== 200){
-                    toast.error("Email já está sendo utilizado :( - Tente outro :D")
+                    toast.error("Login errado")
                 } 
     
             });
     
         setEmail('');
-        setName('');
         setPassword('');
-        setConfirmPassword('');
     }
-    } */
+    
     
     return (
         <Page>
+            <ToastContainer/>
             <TextTittle>
                 <span>function</span>  techStore  <span>(login)</span> 
             </TextTittle>
 
             <FormPage>
-                <form  onSubmit={()=>{console.log('SUBMITEEEEI')}}>
+                <form  onSubmit={confirmLogin}>
                     <Data>  
 
                         <TextInput>
