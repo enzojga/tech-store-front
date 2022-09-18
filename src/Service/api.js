@@ -2,6 +2,12 @@ import axios from "axios";
 
 const URL = "http://localhost:5000";
 
+const createHeaders= (token) => {
+    return {
+        headers: {'Authorization': `Bearer ${token}`}
+    }
+} 
+
 export function postSignUp(body){
     const promise = axios.post(`${URL}/sign-up`, body);
     return promise;
@@ -9,4 +15,9 @@ export function postSignUp(body){
 export function postSignIn(body){
     const promise = axios.post(`${URL}/sign-in`, body);
     return promise;
+}
+
+export function getCheckout(token){
+    const promise = axios.get(`${URL}/checkout`, createHeaders(token));
+    return promise
 }

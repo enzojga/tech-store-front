@@ -79,7 +79,7 @@ export default function SignIn (){
                             <Button> <p>Entrar</p></Button>
                         }
                     
-                        <Link to="/">
+                        <Link to="/sign-up">
                         <TextSignup>Não tem uma conta? Cadatre-se!</TextSignup>
                         </Link>
                     
