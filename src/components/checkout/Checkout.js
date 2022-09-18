@@ -4,6 +4,8 @@ import { useState,useContext,useEffect} from "react";
 import UserContext from "../../contexts/userContext";
 import { getCheckout } from "../../Service/api";
 import ProductResume from "./ProductResume";
+import CardUser from "./CardUser";
+
 
 export default function Checkout(){
 
@@ -12,10 +14,9 @@ export default function Checkout(){
     const [updatevalues, setUpdateValues] = useState(true);
     const [productsUser, setProductsUser] = useState([]);
     const [isEmptyCart, setIsEmptyCart] = useState(true);
-    /* const [sumProducts, setSumProducts] = useState(0); */
     let sumProducts = 0;
     useEffect(()=>{
-        getCheckout('47ff9390-2be2-4147-a911-fa0130675d4e')
+        getCheckout(users.token)
         
             .then((resposta) => {
                setProductsUser(resposta.data);
@@ -35,43 +36,77 @@ export default function Checkout(){
         sumProducts += Number(product.price);
       });
 
+
+
+
+
     return (
         <Page>
             {
                 isEmptyCart === true 
                 ?
                     <>
-                        É TRUE
+                        <Top>
+                            <TextTittleIon>
+                                <ion-icon name="chevron-back-circle-outline"></ion-icon>
+                            </TextTittleIon>
+                            <TextTittle>
+                                  techStore 
+                                  
+                            </TextTittle>
+                            
+                        </Top>
+                      
+                            <Resume>
+                            <TextTittle>
+                                  techStore 
+                                  
+                            </TextTittle>
+                            </Resume>
+                       
+
+
                     </>
                 :
                     <>         
                         <Top>
+                            <TextTittleIon>
+                                <ion-icon name="chevron-back-circle-outline"></ion-icon>
+                            </TextTittleIon>
                             <TextTittle>
                                   techStore 
+                                  
                             </TextTittle>
+                            
                         </Top>
-                        <GradientBox>
+                       {/*  <BlueBox> */}
                             <Resume>
-                            {
-                                productsUser.map((product,index)=>{
-                                    return (<ProductResume 
-                                        key={index} 
-                                        image={product.image} 
-                                        description={product.description}
-                                        price={product.price}
-                                        name={product.name}
-                                        totalPrice={sumProducts}
-                                    />)
-                                })
-                            }
+                                <ProductsContainer>
+                                    {
+                                        productsUser.map((product,index)=>{
+                                            return (<ProductResume 
+                                                key={index} 
+                                                image={product.image} 
+                                                description={product.description}
+                                                price={product.price}
+                                                name={product.name}
+                                            />)
+                                        })
+                                    }
+                                </ProductsContainer>
+                            
                                 <TotalProduct>
-                                 Total   R$ {sumProducts}
+                                    <TextValue>RESUMO DA COMPRA</TextValue>
+                                    <TextValue>Valor Total  </TextValue>
+                                    <TextValue> R$ {sumProducts.toFixed(2)}</TextValue>
                                 </TotalProduct>
                             </Resume>
-                        </GradientBox>
-                        <Payment>
-
-                        </Payment>
+                        {/* </BlueBox> */}
+                        <PaymentDiv>
+                            <Payment>
+                                <CardUser totalPrice={sumProducts.toFixed(2)}/>
+                            </Payment>
+                        </PaymentDiv>
                     </>
             }
         </Page>
@@ -81,67 +116,167 @@ export default function Checkout(){
 
 
 const Page = styled.div`
-    background-color: lightgrey ;
+    background-color: #001333 ;
     display:flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
 `
-const GradientBox = styled.div`
-    background: rgb(4,102,200);
-background: linear-gradient(90deg, rgba(4,102,200,1) 0%, rgba(3,83,164,1) 5%, rgba(2,62,125,1) 12%, rgba(0,40,85,1) 20%, rgba(0,24,69,1) 29%, rgba(0,18,51,1) 60%, rgba(51,65,92,1) 83%, rgba(92,103,125,1) 92%, rgba(125,133,151,1) 96%, rgba(151,157,172,1) 100%);
-    height:250px ;
+const BlueBox = styled.div`
+ background: rgb(0,14,39);
+background: linear-gradient(180deg, rgba(0,14,39,1) 0%, rgba(6,40,64,1) 43%, rgba(14,77,100,1) 78%, rgba(24,122,144,1) 99%, rgba(37,184,204,1) 100%);
+
+    height:300px ;
     display:flex ;
     align-items:center ;
     justify-content:center ;
+    position:relative;
 `
 const Top = styled.div`
     background-color:#FFFF;
     width:100% ;
     height:40px ;
+    display: flex;
+   
+    align-items:center ;
+    padding: 0 18px;
+  
+    
 `
 const Resume = styled.div`
     display: flex;
     align-items:center ;
-   
     width: 100%;
-    height:220px ;
-    padding: 0 18px;
+    height:250px ;
+    padding: 0 190px 0 40px;
+    box-sizing:border-box ;
+    background-image: url("https://imejunior.com.br/wp-content/uploads/2018/03/blue-tech-circuit-board-technology-animated-background-video-graphic-design-hd-1920x1080_ewva7rwie__F0000.png");
+
 `
+const ProductsContainer = styled.div`
+    display: flex;
+    align-items:center ;
+    width: 100%;
+    height:200px ;
+        
+    overflow-x:scroll;
+    /* width */
+::-webkit-scrollbar {
+  height: 10px;
+  margin-top:5px ;
+  
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black
+  ; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #262626; 
+}
+`;
+
 const Payment = styled.div`
-    background-color: #FAFAFA ;
-    width:80%;
+    background-color: #FFFF ;
+    width:70%;
+    height: 1015px;
     height:438px;
     border-radius:20px ;
     padding:25px ;
-
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index:1 ;
     box-sizing:border-box ;
+    display:flex;
+    justify-content: space-around ;
 `
 const TotalProduct = styled.div`
-            font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    font-size: 13.976px;
-    line-height: 17px;
+    font-size: 18px;
+    color: #001233;
+    background-color: #FFFF;
+
+    border-radius:15px 0 0 15px ;
+    width:170px;
+    height:139px ;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    
+    display: flex;
+    flex-direction:column ;
+    
+    position: absolute;
+    right:0;
+    padding:15px ;
+    div:nth-child(1){
+        font-weight: 300;
+        font-size: 12px;
+        color: #001233;
+        margin-bottom:25px ;
+    }
+    div:nth-child(2){
+        font-weight: 400;
+        font-size: 18px;
+        color: #001233;
+        margin-bottom:10px ;
+    }
+    div:nth-child(3){
+        font-weight: 700;
+        font-size: 20px;
+        color: #001233;
+    }
+
+`
+const TextValue = styled.div`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
     text-align: center;
-    color: green;
-    background-color: #EAEAEA;
-    margin-bottom:6px ;
-    border-radius:5px ;
+    color: #001233;
+    background-color: #FFFF;
+
+
 `
 const TextTittle = styled.div` 
     font-family: 'Michroma', sans-serif;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 50px;
     letter-spacing: 0em;
     color: #979DAC;
     text-align: center;
-    display:flex;
-    justify-content:center ;
-    width: 80%;
 
-    span{
-        font-size: 25px;
-        opacity:0.4 ;
-    }
+`
+const TextTittleIon = styled.div`
+    font-family: 'Michroma', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 50px;
+    letter-spacing: 0em;
+    color: #979DAC;
+    text-align: center;
+    margin-right: 12px ;
+
+`
+const PaymentDiv = styled.div`
+
+
+
+background-image: url("https://static.vecteezy.com/ti/vetor-gratis/p1/1963657-abstract-technology-background-background-3d-grid-cyber-technology-ai-tech-wire-network-futuristic-wireframe-artificial-intelligence-cyber-security-background-vetor.jpg");
+    width:100% ;
+    display:flex;
+    align-items: center;
+    justify-content:center ;
+    padding:100px 0;
+    box-sizing:border-box ;
+
 `

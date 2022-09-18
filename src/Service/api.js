@@ -21,3 +21,8 @@ export function getCheckout(token){
     const promise = axios.get(`${URL}/checkout`, createHeaders(token));
     return promise
 }
+export function postCheckout(body, token){
+    const promise = axios.post(`${URL}/checkout`, body, createHeaders(token));
+    return promise;
+}
+
