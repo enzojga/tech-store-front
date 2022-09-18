@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./sign-in/SignIn.js";
 import SignUp from "./sign-up/SignUp.js";
 import UserContext from "../contexts/userContext";
+import Checkout from "./checkout/Checkout";
 
 export default function App(){
 
@@ -18,6 +19,8 @@ export default function App(){
 				<Route path="/" element={<MainPage />} />
 				<Route path="/sign-up/" element={<SignUp/>}/>
                 <Route path="/sign-in/" element={<SignIn />}/>
+
+                <Route path="/checkout/" element={<Checkout />}/>
 			</Routes>
 		</BrowserRouter>
         </UserContext.Provider>
