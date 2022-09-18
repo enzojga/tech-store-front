@@ -7,6 +7,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { postCheckout } from "../../Service/api";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/userContext";
+
+import { useContext } from "react";
 
 export default function CardUser({totalPrice}){
     const [cardNumber, setCardNumber] = useState("");
@@ -14,7 +17,8 @@ export default function CardUser({totalPrice}){
     const [cardExpiration, setCardExpiration] = useState("");
     const [cardCVV, setCardCVV] = useState("");
     const [focus, setFocus] = useState("");
- 
+    const {users, setUsers}= useContext(UserContext)
+
     const navigate = useNavigate();
     function confirmPaymentData(e){
         e.preventDefault();
@@ -27,7 +31,7 @@ export default function CardUser({totalPrice}){
             cardExpiration:cardExpiration
         }
     
-        postCheckout (body,user.token)
+        postCheckout (body,users.token)
             .then((response) => {
                 toast.success(`Status: ${response.data.status}`);
                 toast.success(`Valor: ${response.data.value}. Data: ${response.data.date}`);
