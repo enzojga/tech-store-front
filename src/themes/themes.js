@@ -134,5 +134,41 @@ const Button = styled.div`
         cursor: pointer;
     }
 `
+const MainProduct = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+`
+const ProductInfo = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    h1{
+        font-size: 50px;
+        margin-bottom: 50px;
+        margin-left: 30px;
+        font-weight: 700;
+    }
+    h2{
+        font-size: 30px;
+        margin-bottom: 30px;
+        font-weight: 500;
+    }
+    h3{
+        font-size: 25px;
+        align-self: flex-end;
+        font-weight: 700;
+    }
+`
+const ProductImage = styled.div`
+    img{
+        width: 750px;
+        height: 750px;
+    }
+`
 
-export { HeaderStyle, Content, Button }
+export { HeaderStyle, Content, Button, MainProduct, ProductInfo, ProductImage }
