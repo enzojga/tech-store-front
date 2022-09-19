@@ -12,7 +12,7 @@ export default function Header() {
 
     const [clicked, setClicked] = useState(false);
     const { cartItens, setCartItens} = useContext(UserContext);
-  
+  const navigate=useNavigate();
     console.log(cartItens);
     const { users, setUsers } = useContext(UserContext);
 
