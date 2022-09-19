@@ -3,12 +3,14 @@ import { Content } from "../themes/themes";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import UserContext from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductsPage() {
 
     const [products, setProducts] = useState([]);
     const [filter, setFilter] = useState("");
-    const { cartItens, setCartItens, cartVerify } = useContext(UserContext);
+    const { cartItens, cartVerify } = useContext(UserContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("https://techstore-back-end.herokuapp.com/getProduct").then(p => setProducts(p.data.sort(() => Math.random() - 0.5)));
@@ -21,10 +23,10 @@ export default function ProductsPage() {
                 <h1>Itens em destaque</h1>
                 <div>
                     {products[2] ? products.map((p,i) => { if(i < 4) return <HighlightItem>
-                        <img src={p.image}/> 
+                        <img src={p.image} onClick={() => navigate(`/product/${p.productId}`)}/> 
                         <h1>{p.name}</h1>
                         <h2>R$: {(p.price / 100).toFixed(2)}</h2>
-                        <ion-icon name="cart"></ion-icon>
+                        <ion-icon name="cart" onClick={() => cartVerify(p)}></ion-icon>
                         </HighlightItem>})
                         : null
                     }
@@ -37,10 +39,10 @@ export default function ProductsPage() {
                     <p style={{borderBottom: filter === "celulares" ?"3px solid red" : ""}} onClick={() => filter !== "celulares" ? setFilter("celulares") : setFilter("")}>Celulares</p>
                 </span>
                 <div>
-                    {!filter ? products.map((p,i) => { if(i < 10) return <CategoryItem><img src={products[i]?.image}/> <ion-icon name="cart" onClick={() => setCartItens([...cartItens, p])}></ion-icon> </CategoryItem>}) :
+                    {!filter ? products.map((p,i) => { if(i < 10) return <CategoryItem><img src={products[i]?.image} onClick={() => navigate(`/product/${p.productId}`)}/> <ion-icon name="cart" onClick={() => cartVerify(p)}></ion-icon> </CategoryItem>}) :
                      products.map(p => { if(p.category === filter) return <CategoryItem>
-                        <img src={p.image}/>
-                        <ion-icon name="cart" onClick={() => setCartItens([...cartItens, p])}></ion-icon>
+                        <img src={p.image} onClick={() => navigate(`/product/${p.productId}`)}/>
+                        <ion-icon name="cart" onClick={() => cartVerify(p)}></ion-icon>
                         </CategoryItem>} )}
                 </div>
             </CategoryItens>
@@ -159,6 +161,7 @@ const CategoryItem = styled.div`
     max-width: 230px;
     height: 230px;
     position: relative;
+    border-radius: 5px;
     img{
         width: 100%;
         height: 100%;
@@ -169,8 +172,7 @@ const CategoryItem = styled.div`
         color: black;
         top: 0;
         right: 0;
-        z-index: 1111;
-        :hover{
+            :hover{
             cursor: pointer;
         }
     }
