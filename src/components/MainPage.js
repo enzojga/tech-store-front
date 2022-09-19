@@ -18,7 +18,7 @@ export default function MainPage() {
 
     const [thumbSwiper, setThumbSwiper] = useState(null);
     const [products, setProducts] = useState([]);
-    const {cartItens, setCartItens} = useContext(UserContext);
+    const {cartVerify} = useContext(UserContext);
 
     const slides = [];
 
@@ -40,7 +40,7 @@ export default function MainPage() {
                         <h2>{products[i].description}</h2>
                         <h3>{(products[i].price / 100).toFixed(2)}</h3>
                     </ProductInfo>
-                    <ProductImage onClick={() => setCartItens([...cartItens, products[i]])}>
+                    <ProductImage onClick={() => cartVerify(products[i])}>
                         <img src={products[i].image}/>
                     </ProductImage>
                 </MainProduct>

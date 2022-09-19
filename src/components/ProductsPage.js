@@ -8,7 +8,7 @@ export default function ProductsPage() {
 
     const [products, setProducts] = useState([]);
     const [filter, setFilter] = useState("");
-    const { cartItens, setCartItens } = useContext(UserContext);
+    const { cartItens, setCartItens,cartVerify } = useContext(UserContext);
 
     useEffect(() =>{
         axios.get("https://techstore-back-end.herokuapp.com/getProduct").then(p => setProducts(p.data.sort(() => Math.random() - 0.5)));
@@ -44,7 +44,7 @@ export default function ProductsPage() {
                     <p style={{borderBottom: filter === "celulares" ?"3px solid red" : ""}} onClick={() => filter !== "celulares" ? setFilter("celulares") : setFilter("")}>Celulares</p>
                 </span>
                 <div>
-                    {!filter ? products.map((p,i) => { if(i < 10) return <HighlightItem onClick={() => setCartItens([...cartItens, p])}><img src={products[i]?.image}/></HighlightItem>}) :
+                    {!filter ? products.map((p,i) => { if(i < 10) return <HighlightItem onClick={() => cartVerify(p)}><img src={products[i]?.image}/></HighlightItem>}) :
                      products.map(p => { if(p.category === filter) return <HighlightItem onClick={() => setCartItens([...cartItens, p])}><img src={p.image}/></HighlightItem>} )}
                 </div>
             </CategoryItens>
