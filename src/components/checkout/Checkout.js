@@ -13,31 +13,14 @@ export default function Checkout(){
     const { users, setUsers } = useContext(UserContext);
     const [updatevalues, setUpdateValues] = useState(true);
     const [productsUser, setProductsUser] = useState([]);
-    const [isEmptyCart, setIsEmptyCart] = useState(true);
+    const [isEmptyCart, setIsEmptyCart] = useState(false);
     const {cartItens, setCartItens} = useContext(UserContext)
-    let sumProducts = 0;
-
-    useEffect(()=>{
-        console.log(cartItens, '********')
-        getCheckout(users.token)
-        
-            .then((resposta) => {
-               setProductsUser(resposta.data);
-                if(resposta.data.length===0){
-                    setIsEmptyCart(true)
-                } else{
-                    setIsEmptyCart(false)
-                }   
-                
-            })
-        
-        },[updatevalues])
-
-      productsUser.forEach(product => {
-        sumProducts += Number(product.price);
-      });
 
 
+
+ 
+      let acumulador = 0;
+    cartItens.forEach(t =>  acumulador += Number(t.price));
 
 
 
@@ -69,7 +52,7 @@ export default function Checkout(){
                     <>         
                         <Top>
                             <TextTittleIon>
-                                <ion-icon name="chevron-back-circle-outline"></ion-icon>
+                                <ion-icon name="chevron-back-circle-outline" onClick={()=>navigate('/')}></ion-icon>
                             </TextTittleIon>
                             <TextTittle>
                                   techStore 
@@ -96,13 +79,13 @@ export default function Checkout(){
                                 <TotalProduct>
                                     <TextValue>RESUMO DA COMPRA</TextValue>
                                     <TextValue>Valor Total  </TextValue>
-                                    <TextValue> R$ {sumProducts.toFixed(2)}</TextValue>
+                                    <TextValue> R$ {(acumulador / 100).toFixed(2)}</TextValue>
                                 </TotalProduct>
                             </Resume>
                         {/* </BlueBox> */}
                         <PaymentDiv>
                             <Payment>
-                                <CardUser totalPrice={sumProducts.toFixed(2)}/>
+                                <CardUser totalPrice={(acumulador / 100).toFixed(2)}/>
                             </Payment>
                         </PaymentDiv>
                     </>
@@ -145,7 +128,7 @@ const Resume = styled.div`
     display: flex;
     align-items:center ;
     width: 100%;
-    height:250px ;
+    height:260px ;
     padding: 0 190px 0 40px;
     box-sizing:border-box ;
     background-image: url("https://imejunior.com.br/wp-content/uploads/2018/03/blue-tech-circuit-board-technology-animated-background-video-graphic-design-hd-1920x1080_ewva7rwie__F0000.png");
@@ -263,6 +246,7 @@ const TextTittleIon = styled.div`
     color: #979DAC;
     text-align: center;
     margin-right: 12px ;
+    cursor: pointer;
 
 `
 const PaymentDiv = styled.div`

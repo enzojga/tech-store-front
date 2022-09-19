@@ -4,17 +4,17 @@ import UserContext from "../contexts/userContext";
 
 import { useNavigate, useResolvedPath } from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Header() {
 
     const [clicked, setClicked] = useState(false);
+
     const [type, setType] = useState(null);
     const { cartItens, setCartItens } = useContext(UserContext);
     const navigate = useNavigate();
     console.log(cartItens);
+
     const { users, setUsers } = useContext(UserContext);
 
     function removeCartProduct(obj) {
@@ -22,15 +22,16 @@ export default function Header() {
         setCartItens([...filteredCartItens])
     }
     console.log(users, '*************')
+
     function verifyLogin() {
         if (users.length === 0) {
-            toast.error("Você não possui um login :c")
-            setTimeout(() => {
+            
                 navigate('/sign-in')
-            }, 2000);
+            
         }
         if (users.token !== 0) {
             navigate('/checkout')
+
         }
     }
 
@@ -39,8 +40,12 @@ export default function Header() {
 
     return (
         <>
-            <ToastContainer />
-            <HeaderStyle>
+             <div>
+                <h2 onClick={() => navigate("/")}>Tech Store</h2>
+            </div>
+            
+        <HeaderStyle>
+
                 <div>
                     <h2 onClick={() => navigate("/")}>Tech Store</h2>
                     <div>
