@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+
 import { ThreeDots } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postSignIn } from "../../Service/api";
+import { useState,useContext,} from "react";
+import UserContext from "../../contexts/userContext";
 
 export default function SignIn() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { users, setUsers } = useContext(UserContext);
     const [isloading, setIsLoading] = useState(false)
     console.log("comecei ")
 
@@ -25,7 +28,8 @@ export default function SignIn() {
         }
 
         postSignIn(body)
-            .then(() => {
+            .then((response) => {
+                setUsers(response.data);
                 toast.success("Tudo certo! Boas compras!! :)");
                 setTimeout(() => {
                     navigate('/');

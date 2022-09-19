@@ -10,6 +10,7 @@ export default function Header() {
 
     const [clicked, setClicked] = useState(false);
     const { cartItens, setCartItens} = useContext(UserContext);
+  
     console.log(cartItens);
     const { users, setUsers } = useContext(UserContext);
     const navigate = useNavigate();
@@ -25,7 +26,8 @@ export default function Header() {
                 navigate('/sign-in')
             }, 2000); 
         }
-        else{navigate('/checkout')}
+         if(users.token!==0){
+            navigate('/checkout')}
     }
     
     let acumulador = 0;
@@ -37,7 +39,7 @@ export default function Header() {
         <HeaderStyle>
                 
             <div>
-                <h2>Tech Store</h2>
+                <h2 onClick={() => navigate("/")}>Tech Store</h2>
 
                 <div>
                     <ion-icon name="search-outline"></ion-icon>
