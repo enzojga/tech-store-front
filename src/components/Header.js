@@ -25,10 +25,9 @@ export default function Header() {
 
     function verifyLogin() {
         if (users.length === 0) {
-            toast.error("Você não possui um login :c")
-            setTimeout(() => {
+            
                 navigate('/sign-in')
-            }, 2000);
+            
         }
         if (users.token !== 0) {
             navigate('/checkout')
@@ -41,12 +40,11 @@ export default function Header() {
 
     return (
         <>
-
-        <HeaderStyle>
-                
-            <div>
+             <div>
                 <h2 onClick={() => navigate("/")}>Tech Store</h2>
-
+            </div>
+            
+        <HeaderStyle>
 
                 <div>
                     <h2 onClick={() => navigate("/")}>Tech Store</h2>
