@@ -19,6 +19,9 @@ const HeaderStyle = styled.div`
         font-weight: 700;
         font-size: 27px;
         margin-left: 15px;
+        :hover{
+            cursor: pointer;
+        }
     }
     & > div{
         display: flex;
@@ -52,6 +55,7 @@ const HeaderStyle = styled.div`
     & > :nth-child(2){
         width: 30%;
         min-height: 100px;
+        max-height: 50%;
         background-color: red;
         background-color: #001233;
         position: fixed;
@@ -61,6 +65,7 @@ const HeaderStyle = styled.div`
         border-width: 0 0 3px 3px;
         border-color: #979DAC;
         border-style:solid;
+        overflow-y: auto;
         h1{
             font-size: 32px;
             color: white;
@@ -142,7 +147,6 @@ const MainProduct = styled.div`
     justify-content: space-evenly;
 `
 const ProductInfo = styled.div`
-    width: 50%;
     display: flex;
     flex-direction: column;
     color: white;
@@ -157,18 +161,69 @@ const ProductInfo = styled.div`
         font-size: 30px;
         margin-bottom: 30px;
         font-weight: 500;
+        max-height: 50%;
+        min-width: 60%;
     }
     h3{
         font-size: 25px;
         align-self: flex-end;
         font-weight: 700;
     }
+    div{
+        display: flex;
+    }
 `
 const ProductImage = styled.div`
     img{
-        width: 750px;
-        height: 750px;
+        max-width: 2px;
+        max-height: 2px;
+    }
+`
+const BigButton = styled.div`
+    width: 200px;
+    height: 100px;
+    color: white;
+    font-size: 2em;
+    background-color: ${props => props.color};
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    margin-left: 7px;
+    align-self: center;
+    border-radius: 10px;
+    align-self: flex-start;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    :hover{
+        cursor: pointer;
+    }
+`
+const CategoryItem = styled.div`
+    position: relative;
+    max-width: 230px;
+    height: 230px;
+    img{
+        min-width: 100%;
+        min-height: 100%;
+    }
+    ion-icon{
+        position: absolute;
+        font-size: 30px;
+        color: black;
+            :hover{
+            cursor: pointer;
+        }
+        :nth-child(3){
+            top: 0;
+            right: 0;
+        }
+        :nth-child(2){
+            top: 0;
+            left: 0;
+        }
     }
 `
 
-export { HeaderStyle, Content, Button, MainProduct, ProductInfo, ProductImage }
+
+export { HeaderStyle, Content, Button, MainProduct, ProductInfo, ProductImage, BigButton, CategoryItem }
