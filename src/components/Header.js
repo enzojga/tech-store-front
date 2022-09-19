@@ -12,8 +12,8 @@ export default function Header() {
 
     const [clicked, setClicked] = useState(false);
     const { cartItens, setCartItens} = useContext(UserContext);
-  const navigate=useNavigate();
-    console.log(cartItens);
+    const navigate=useNavigate();
+    
     const { users, setUsers } = useContext(UserContext);
 
     function removeCartProduct(obj) {
@@ -23,10 +23,11 @@ export default function Header() {
     console.log(users, '*************')
     function verifyLogin(){
         if(users.length===0){
-            toast.error("Você não possui um login :c")
+            
             setTimeout(() => {
                 navigate('/sign-in')
             }, 2000); 
+            toast.error("Você não possui um login :c")
         }
          if(users.token!==0){
             navigate('/checkout')}

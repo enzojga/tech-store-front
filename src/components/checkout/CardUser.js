@@ -24,12 +24,15 @@ export default function CardUser({totalPrice}){
         e.preventDefault();
 
         const body = {
-            name: cardOwner,
+            
             numberCard: cardNumber,
             cv:cardCVV,
-            value: Number(totalPrice),
-            cardExpiration:cardExpiration
+            name: cardOwner,
+            cardExpiration:cardExpiration,
+            value: Number(totalPrice)
+            
         }
+        console.log(body, 'BODY DO FRONT')
     
         postCheckout (body,users.token)
             .then((response) => {

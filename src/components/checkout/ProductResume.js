@@ -13,11 +13,11 @@ export default function ProductResume({price, totalPrice, description, image, na
             <NameProduct>
                 {name}
             </NameProduct>
-            <DescripitionProduct>
+            {/* <DescripitionProduct>
                 {description}
-            </DescripitionProduct>
+            </DescripitionProduct> */}
             <PriceProduct>
-               R$ {price}
+               R$ {(price/100).toFixed(2)}
             </PriceProduct>
 
         </PageProduct>
@@ -32,19 +32,21 @@ const PageProduct = styled.div`
     align-items:center ;
     background-color: #FFFF;
     margin-right:20px ;
-    height: 170px ;
-    border-radius:5px ;
+    height: 180px ;
+    border-radius:15px ;
     width:139px ;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
 `
 const ImageProduct = styled.div`
-    width: 120px;
+    width: 100px;
     height:84px ;
     box-shadow: 0 8 10 rgba(0,0,0,0.3);
     img{
         width: 90px;
     border-radius:5px;
+    
     }
+    margin-bottom:15px ;
 `
 const NameProduct = styled.div` 
     font-family: 'Roboto', sans-serif;
@@ -52,10 +54,11 @@ const NameProduct = styled.div`
     font-size: 12px;
     text-align: center;
     color: #001233;
-    width:120px;
+    width:100%;
     margin-bottom: 8px ;
+    margin-top:15px ;
 `
-const DescripitionProduct = styled.div`
+/* const DescripitionProduct = styled.div`
         font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 10px;
@@ -64,13 +67,13 @@ const DescripitionProduct = styled.div`
     width: 122px;
     height:21px ;
     margin-bottom:8px ;
-`
+` */
 const PriceProduct = styled.div`
         font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 13.976px;
     text-align: center;
     color: #001233;
-    width:59px;
+    
     height:15px ;
 `
