@@ -14,17 +14,18 @@ export default function Checkout(){
     const [updatevalues, setUpdateValues] = useState(true);
     const [productsUser, setProductsUser] = useState([]);
     const [isEmptyCart, setIsEmptyCart] = useState(true);
+    const {cartItens, setCartItens} = useContext(UserContext)
     let sumProducts = 0;
+
     useEffect(()=>{
+        console.log(cartItens, '********')
         getCheckout(users.token)
         
             .then((resposta) => {
                setProductsUser(resposta.data);
                 if(resposta.data.length===0){
-                    console.log(resposta.data, 'GET DA RESPOSTA')
                     setIsEmptyCart(true)
                 } else{
-                    console.log(resposta.data, 'GET DA RESPOSTA')
                     setIsEmptyCart(false)
                 }   
                 
@@ -63,9 +64,6 @@ export default function Checkout(){
                                   
                             </TextTittle>
                             </Resume>
-                       
-
-
                     </>
                 :
                     <>         
@@ -83,7 +81,7 @@ export default function Checkout(){
                             <Resume>
                                 <ProductsContainer>
                                     {
-                                        productsUser.map((product,index)=>{
+                                        cartItens.map((product,index)=>{
                                             return (<ProductResume 
                                                 key={index} 
                                                 image={product.image} 
