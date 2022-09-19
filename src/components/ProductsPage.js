@@ -32,7 +32,7 @@ export default function ProductsPage() {
             </HighlightItens>
             <CategoryItens>
                 <span>
-                    <h2>Itens por cateogria:</h2> <p style={{borderBottom: filter === "games" ?"3px solid red" : ""}} onClick={() => filter !== "games" ? setFilter("games") : setFilter("")}>Games</p>
+                    <h2>Itens por categria:</h2> <p style={{borderBottom: filter === "games" ?"3px solid red" : ""}} onClick={() => filter !== "games" ? setFilter("games") : setFilter("")}>Games</p>
                      <p style={{borderBottom: filter === "hardware" ?"3px solid red" : ""}} onClick={() => filter !== "hardware" ? setFilter("hardware") : setFilter("")}>Hardware</p>
                     <p style={{borderBottom: filter === "celulares" ?"3px solid red" : ""}} onClick={() => filter !== "celulares" ? setFilter("celulares") : setFilter("")}>Celulares</p>
                 </span>
