@@ -30,6 +30,8 @@ export default function SignIn() {
         postSignIn(body)
             .then((response) => {
                 setUsers(response.data);
+                const serializedUser = JSON.stringify(response.data);
+                localStorage.setItem("userTechstore", serializedUser);
                 toast.success("Tudo certo! Boas compras!! :)");
                 setTimeout(() => {
                     navigate('/');

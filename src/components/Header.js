@@ -38,6 +38,10 @@ export default function Header() {
 
         }
     }
+    function logout(){
+        localStorage.removeItem('userTechstore');
+        navigate('/sign-in')
+    }
 
     let acumulador = 0;
     cartItens.forEach(t => acumulador += Number(t.price));
@@ -51,7 +55,7 @@ export default function Header() {
                 <div>
                     <h2 onClick={() => navigate("/")}>Tech Store</h2>
                     <div>
-                        <ion-icon onClick={() => setUsers([])} name="exit-outline"></ion-icon>
+                        <ion-icon onClick={logout} name="exit-outline"></ion-icon>
                         <div onClick={() => { !clicked ? setClicked(true) : setClicked(false); setType(0) }}> {cartItens[0] ? <div><p>{cartItens.length}</p></div> : null} <ion-icon name="cart-outline"></ion-icon></div>
                         <ion-icon onClick={() => { !clicked ? setClicked(true) : setClicked(false); setType(1) }} name="person-circle"></ion-icon>
                     </div>
