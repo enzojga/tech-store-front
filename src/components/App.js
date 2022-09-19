@@ -8,11 +8,11 @@ import Checkout from "./checkout/Checkout";
 
 export default function App(){
 
-
     const [users, setUsers] = useState([]);
+    const [cartItens,setCartItens] = useState([]);
     
     return (
-        <UserContext.Provider value={{users, setUsers}}>
+        <UserContext.Provider value={{users, setUsers, cartItens, setCartItens}}>
         <BrowserRouter>
 		
 			<Routes>

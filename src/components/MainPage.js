@@ -1,5 +1,6 @@
-import { Header, Content } from "../themes/themes";
-import { useState,useEffect } from "react";
+import { Content } from "../themes/themes";
+import { useState,useEffect, useContext } from "react";
+import Header from "./Header";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Thumbs, Autoplay } from "swiper";
@@ -9,6 +10,7 @@ import "swiper/swiper-bundle.css";
 import 'swiper/modules/navigation/navigation';
 import 'swiper/modules/pagination/pagination';
 import '../themes/style.css';
+import UserContext from "../contexts/userContext";
 
 SwiperCore.use([Navigation, Pagination, Thumbs, Autoplay])
 
@@ -16,15 +18,20 @@ export default function MainPage() {
 
     const [thumbSwiper, setThumbSwiper] = useState(null);
     const [products, setProducts] = useState([]);
+    const {cartItens, setCartItens} = useContext(UserContext);
 
     const slides = [];
 
     useEffect(() =>{
-        axios.get("http://localhost:5000/getProduct").then(p => setProducts(p.data));
+        axios.get("https://techstore-back-end.herokuapp.com/getProduct").then(p => setProducts(p.data));
     },[]);
     console.log(products)
 
-    for (let i = 0; i < products.length; i++) {
+    products.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < 3; i++) {
+        if(products.length === 0){
+            break;
+        }
         slides.push(
             <SwiperSlide>
                 <MainProduct>
@@ -33,14 +40,17 @@ export default function MainPage() {
                         <h2>{products[i].description}</h2>
                         <h3>{(products[i].price / 100).toFixed(2)}</h3>
                     </ProductInfo>
-                    <ProductImage image={products[i].image}>
+                    <ProductImage image={products[i].image} onClick={() => setCartItens([...cartItens, products[i]])}>
                     </ProductImage>
                 </MainProduct>
             </SwiperSlide>
         )
     }
     const thumb = [];
-    for (let i = 0; i < products.length; i++) {
+    for (let i = 0; i < 3; i++) {
+        if(products.length === 0){
+            break;
+        }
         thumb.push(
             <SwiperSlide>
                 <img src={products[i].image} />
@@ -50,23 +60,12 @@ export default function MainPage() {
 
     return (
         <>
-            <Header>
-                <h2>Tech Store</h2>
-
-                <div>
-                    <p>Home</p>
-                    <p>Paginas</p>
-                    <p>Produtos</p>
-                    <ion-icon name="search-outline"></ion-icon>
-                    <ion-icon name="cart-outline"></ion-icon>
-                    <ion-icon name="person-circle"></ion-icon>
-                </div>
-            </Header>
+            <Header/>
             <Content color={"#001845"}>
                 <Swiper navigation pagination={{ clickable: true }} loop autoplay thumbs={{ swiper: thumbSwiper }} >
                     {slides}
                 </Swiper>
-                <Swiper onSwiper={setThumbSwiper} slidesPerView={products.length} style={{maxWidth:"650px",position:"absolute",bottom:0,right:"25px",margin:"0 0 20px 0"}}>
+                <Swiper onSwiper={setThumbSwiper} slidesPerView={3} style={{maxWidth:"650px",position:"absolute",bottom:0,right:"25px",margin:"0 0 20px 0"}}>
                     {thumb}
                 </Swiper>
             </Content>
