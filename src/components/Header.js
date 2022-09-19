@@ -4,8 +4,6 @@ import UserContext from "../contexts/userContext";
 
 import { useNavigate, useResolvedPath } from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Header() {
@@ -24,10 +22,10 @@ export default function Header() {
     function verifyLogin(){
         if(users.length===0){
             
-            setTimeout(() => {
+            
                 navigate('/sign-in')
-            }, 2000); 
-            toast.error("Você não possui um login :c")
+           
+           
         }
          if(users.token!==0){
             navigate('/checkout')}
@@ -38,7 +36,6 @@ export default function Header() {
 
     return (
         <>
-            <ToastContainer/>
         <HeaderStyle>
                 
             <div>

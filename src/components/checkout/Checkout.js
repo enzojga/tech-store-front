@@ -15,27 +15,9 @@ export default function Checkout(){
     const [productsUser, setProductsUser] = useState([]);
     const [isEmptyCart, setIsEmptyCart] = useState(false);
     const {cartItens, setCartItens} = useContext(UserContext)
-    let sumProducts = 0;
 
-/*     useEffect(()=>{
-        console.log(cartItens, '********')
-        getCheckout(users.token)
-        
-            .then((resposta) => {
-               setProductsUser(resposta.data);
-                if(resposta.data.length===0){
-                    setIsEmptyCart(true)
-                } else{
-                    setIsEmptyCart(false)
-                }   
-                
-            })
-        
-        },[updatevalues])
 
-      /* productsUser.forEach(product => {
-        sumProducts += Number(product.price);
-      }); */
+
  
       let acumulador = 0;
     cartItens.forEach(t =>  acumulador += Number(t.price));
