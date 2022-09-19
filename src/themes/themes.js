@@ -27,6 +27,10 @@ const HeaderStyle = styled.div`
         justify-content: space-around;
         ion-icon{
             font-size: 25px;
+            cursor: pointer;
+        }
+        p{
+            cursor: pointer;
         }
     }}
     & > :nth-child(2){

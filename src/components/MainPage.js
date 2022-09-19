@@ -23,11 +23,11 @@ export default function MainPage() {
     const slides = [];
 
     useEffect(() =>{
-        axios.get("https://techstore-back-end.herokuapp.com/getProduct").then(p => setProducts(p.data));
+        axios.get("https://techstore-back-end.herokuapp.com/getProduct").then(p => setProducts(p.data.sort(() => Math.random() - 0.5)));
+        products.sort(() => Math.random() - 0.5);
     },[]);
     console.log(products)
 
-    products.sort(() => Math.random() - 0.5);
     for (let i = 0; i < 3; i++) {
         if(products.length === 0){
             break;
@@ -40,7 +40,8 @@ export default function MainPage() {
                         <h2>{products[i].description}</h2>
                         <h3>{(products[i].price / 100).toFixed(2)}</h3>
                     </ProductInfo>
-                    <ProductImage image={products[i].image} onClick={() => setCartItens([...cartItens, products[i]])}>
+                    <ProductImage onClick={() => setCartItens([...cartItens, products[i]])}>
+                        <img src={products[i].image}/>
                     </ProductImage>
                 </MainProduct>
             </SwiperSlide>
@@ -105,10 +106,8 @@ const ProductInfo = styled.div`
     }
 `
 const ProductImage = styled.div`
-    width: 750px;
-    height: 500px;
-    background-image: url(${props => props.image});
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    img{
+        width: 750px;
+        height: 750px;
+    }
 `

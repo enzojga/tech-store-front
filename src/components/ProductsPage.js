@@ -7,13 +7,13 @@ import UserContext from "../contexts/userContext";
 export default function ProductsPage() {
 
     const [products, setProducts] = useState([]);
+    const [filter, setFilter] = useState("");
     const { cartItens, setCartItens } = useContext(UserContext);
 
     useEffect(() =>{
-        axios.get("https://techstore-back-end.herokuapp.com/getProduct").then(p => setProducts(p.data));
+        axios.get("https://techstore-back-end.herokuapp.com/getProduct").then(p => setProducts(p.data.sort(() => Math.random() - 0.5)));
     },[]);
 
-    products.sort(() => Math.random() - 0.5);
 
     return (
         <ContentProducts color={"#002855"} style={{ flexDirection: "collum" }}>
@@ -39,10 +39,13 @@ export default function ProductsPage() {
             </HighlightItens>
             <CategoryItens>
                 <span>
-                    <h2>Itens por cateogria:</h2> <p>Games</p> <p>Hardware</p> <p>Celulares</p>
+                    <h2>Itens por cateogria:</h2> <p style={{borderBottom: filter === "games" ?"3px solid red" : ""}} onClick={() => filter !== "games" ? setFilter("games") : setFilter("")}>Games</p>
+                     <p style={{borderBottom: filter === "hardware" ?"3px solid red" : ""}} onClick={() => filter !== "hardware" ? setFilter("hardware") : setFilter("")}>Hardware</p>
+                    <p style={{borderBottom: filter === "celulares" ?"3px solid red" : ""}} onClick={() => filter !== "celulares" ? setFilter("celulares") : setFilter("")}>Celulares</p>
                 </span>
                 <div>
-                    {products.map((p,i) => { if(i < 10) return <HighlightItem onClick={() => setCartItens([...cartItens, p])}><img src={products[i]?.image}/></HighlightItem>})}
+                    {!filter ? products.map((p,i) => { if(i < 10) return <HighlightItem onClick={() => setCartItens([...cartItens, p])}><img src={products[i]?.image}/></HighlightItem>}) :
+                     products.map(p => { if(p.category === filter) return <HighlightItem onClick={() => setCartItens([...cartItens, p])}><img src={p.image}/></HighlightItem>} )}
                 </div>
             </CategoryItens>
         </ContentProducts>

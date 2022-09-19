@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:5000";
+const URL = "https://techstore-back-end.herokuapp.com";
 
 const createHeaders= (token) => {
     return {

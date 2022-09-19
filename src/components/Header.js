@@ -16,16 +16,15 @@ export default function Header() {
 
                 <div>
                     <p>Home</p>
-                    <p>Paginas</p>
-                    <p onClick={() => setClicked(true)}>Produtos</p>
+                    <p>Produtos</p>
                     <ion-icon name="search-outline"></ion-icon>
-                    <ion-icon name="cart-outline"></ion-icon>
+                    <ion-icon onClick={() => !clicked ? setClicked(true) : setClicked(false)} name="cart-outline"></ion-icon>
                     <ion-icon name="person-circle"></ion-icon>
                 </div>
             </div>
             <div style={{display:clicked === false ? "none" : "initial"}}>
                 <h1>Seu carrinho:</h1>
-                {cartItens[0] ? cartItens.map(p => <div> <img src={p.image}></img> <div><p>{p.name}</p> <p>R$: {(p.price / 100).toFixed(2)}</p></div> </div>) : "Seu carrinho esta vazio"}
+                {cartItens[0] ? cartItens.map(p => <div> <img src={p.image}></img> <div><p>{p.name}</p> <p>R$: {(p.price / 100).toFixed(2)}</p></div> </div>) : <h1>Seu carrinho esta vazio</h1>}
             </div>
     </HeaderStyle >
 )
