@@ -23,7 +23,7 @@ export default function App() {
 
 
     return (
-        <UserContext.Provider value={{ users, setUsers, cartItens, cartVerify}}>
+        <UserContext.Provider value={{ users, setUsers, cartItens, cartVerify, setCartItens }}>
             <BrowserRouter>
 
                 <Routes>

@@ -17,7 +17,7 @@ export default function CardUser({totalPrice}){
     const [cardExpiration, setCardExpiration] = useState("");
     const [cardCVV, setCardCVV] = useState("");
     const [focus, setFocus] = useState("");
-    const {users, setUsers}= useContext(UserContext)
+    const {users, setCartItens}= useContext(UserContext)
 
     const navigate = useNavigate();
     function confirmPaymentData(e){
@@ -38,6 +38,7 @@ export default function CardUser({totalPrice}){
             .then((response) => {
                 toast.success(`Status: ${response.data.status}`);
                 toast.success(`Valor: ${response.data.value}. Data: ${response.data.date}`);
+                setCartItens([]);
                 setTimeout(()=>{
                     navigate('/');
                 },4000) 

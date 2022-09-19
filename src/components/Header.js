@@ -1,8 +1,8 @@
 import { HeaderStyle, Button, BigButton } from "../themes/themes";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserContext from "../contexts/userContext";
 
-import { useNavigate, useResolvedPath } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -16,6 +16,10 @@ export default function Header() {
     console.log(cartItens);
 
     const { users, setUsers } = useContext(UserContext);
+
+    useEffect(() => {
+
+    })
 
     function removeCartProduct(obj) {
         const filteredCartItens = cartItens.filter(p => p.name !== obj.name);
@@ -47,6 +51,7 @@ export default function Header() {
                 <div>
                     <h2 onClick={() => navigate("/")}>Tech Store</h2>
                     <div>
+                        <ion-icon onClick={() => setUsers([])} name="exit-outline"></ion-icon>
                         <div onClick={() => { !clicked ? setClicked(true) : setClicked(false); setType(0) }}> {cartItens[0] ? <div><p>{cartItens.length}</p></div> : null} <ion-icon name="cart-outline"></ion-icon></div>
                         <ion-icon onClick={() => { !clicked ? setClicked(true) : setClicked(false); setType(1) }} name="person-circle"></ion-icon>
                     </div>
@@ -60,7 +65,7 @@ export default function Header() {
                             <h2>Não tem conta?</h2>
                             <BigButton onClick={() => navigate("sign-up")} color="Red">Cadastrar</BigButton>
                         </div> :
-                            <h1>Ola {users.name}</h1>
+                                <h1>Ola {users.name}</h1>
                     }
                 </div>
             </HeaderStyle >
