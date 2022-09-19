@@ -1,5 +1,6 @@
 import { Content } from "../themes/themes";
 import { useState,useEffect, useContext } from "react";
+import { BigButton } from "../themes/themes";
 import Header from "./Header";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +12,7 @@ import 'swiper/modules/navigation/navigation';
 import 'swiper/modules/pagination/pagination';
 import '../themes/style.css';
 import UserContext from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 
 SwiperCore.use([Navigation, Pagination, Thumbs, Autoplay])
 
@@ -19,6 +21,7 @@ export default function MainPage() {
     const [thumbSwiper, setThumbSwiper] = useState(null);
     const [products, setProducts] = useState([]);
     const {cartVerify} = useContext(UserContext);
+    const navigate = useNavigate();
 
     const slides = [];
 
@@ -39,8 +42,12 @@ export default function MainPage() {
                         <h1>{products[i].name}</h1>
                         <h2>{products[i].description}</h2>
                         <h3>{(products[i].price / 100).toFixed(2)}</h3>
+                        <div style={{display:"flex"}}>
+                            <BigButton onClick={() => cartVerify(products[i])} color="red">Adicionar ao carrinho</BigButton>
+                            <BigButton onClick={() => navigate(`/product/${products[i].productId}`)} color="blue">Ver Pagina do produto</BigButton>
+                        </div>
                     </ProductInfo>
-                    <ProductImage onClick={() => cartVerify(products[i])}>
+                    <ProductImage>
                         <img src={products[i].image}/>
                     </ProductImage>
                 </MainProduct>
