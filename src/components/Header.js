@@ -1,18 +1,21 @@
 import { HeaderStyle, Button } from "../themes/themes";
 import { useState, useContext } from "react";
 import UserContext from "../contexts/userContext";
+
 import { useNavigate, useResolvedPath } from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export default function Header() {
 
     const [clicked, setClicked] = useState(false);
     const { cartItens, setCartItens} = useContext(UserContext);
+    const navigate = useNavigate();
     console.log(cartItens);
     const { users, setUsers } = useContext(UserContext);
-    const navigate = useNavigate();
+
     function removeCartProduct(obj) {
         const filteredCartItens = cartItens.filter(p => p.name !== obj.name);
         setCartItens([...filteredCartItens])
@@ -37,7 +40,7 @@ export default function Header() {
         <HeaderStyle>
                 
             <div>
-                <h2>Tech Store</h2>
+                <h2 onClick={() => navigate("/")}>Tech Store</h2>
 
                 <div>
                     <ion-icon name="search-outline"></ion-icon>

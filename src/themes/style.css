@@ -26,3 +26,10 @@
 .swiper-pagination-bullet-active{
     background-color: red;
 }
+
+@media (min-width: 1080){
+    .display-none{
+        display: none;
+    }
+}
+
