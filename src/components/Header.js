@@ -21,7 +21,7 @@ export default function Header() {
         const filteredCartItens = cartItens.filter(p => p.name !== obj.name);
         setCartItens([...filteredCartItens])
     }
-    console.log(users, '*************')
+    console.log(users, 'USERS AQUI')
 
     function verifyLogin() {
         if (users.length === 0) {
@@ -29,7 +29,7 @@ export default function Header() {
                 navigate('/sign-in')
             
         }
-        if (users.token !== 0) {
+        if (users.length !== 0) {
             navigate('/checkout')
 
         }
@@ -40,9 +40,7 @@ export default function Header() {
 
     return (
         <>
-             <div>
-                <h2 onClick={() => navigate("/")}>Tech Store</h2>
-            </div>
+             
             
         <HeaderStyle>
 
