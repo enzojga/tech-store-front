@@ -12,7 +12,7 @@ export default function Header() {
 
     const [clicked, setClicked] = useState(false);
     const { cartItens, setCartItens} = useContext(UserContext);
-    const navigate = useNavigate();
+  const navigate=useNavigate();
     console.log(cartItens);
     const { users, setUsers } = useContext(UserContext);
 
@@ -28,7 +28,8 @@ export default function Header() {
                 navigate('/sign-in')
             }, 2000); 
         }
-        else{navigate('/checkout')}
+         if(users.token!==0){
+            navigate('/checkout')}
     }
     
     let acumulador = 0;
