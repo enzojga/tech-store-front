@@ -5,6 +5,8 @@ import SignIn from "./sign-in/SignIn.js";
 import SignUp from "./sign-up/SignUp.js";
 import UserContext from "../contexts/userContext";
 import Checkout from "./checkout/Checkout";
+import Product from "./Product";
+import "./reset.css"
 
 export default function App() {
 
@@ -21,7 +23,7 @@ export default function App() {
 
 
     return (
-        <UserContext.Provider value={{ users, setUsers, cartItens, cartVerify, setCartItens}}>
+        <UserContext.Provider value={{ users, setUsers, cartItens, cartVerify}}>
             <BrowserRouter>
 
                 <Routes>
@@ -29,6 +31,7 @@ export default function App() {
                     <Route path="/sign-up/" element={<SignUp />} />
                     <Route path="/sign-in/" element={<SignIn />} />
                     <Route path="/checkout/" element={<Checkout />} />
+                    <Route path="/product/:idProduct" element={<Product />}></Route>
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

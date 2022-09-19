@@ -66,7 +66,7 @@ export default function MainPage() {
                 <Swiper navigation pagination={{ clickable: true }} loop autoplay thumbs={{ swiper: thumbSwiper }} >
                     {slides}
                 </Swiper>
-                <Swiper onSwiper={setThumbSwiper} slidesPerView={3} style={{maxWidth:"650px",position:"absolute",bottom:0,right:"25px",margin:"0 0 20px 0"}}>
+                <Swiper className="display-none" onSwiper={setThumbSwiper} slidesPerView={3} style={{maxWidth:"650px",position:"absolute",bottom:0,left:"25px",margin:"0 0 20px 0"}}>
                     {thumb}
                 </Swiper>
             </Content>
@@ -107,7 +107,8 @@ const ProductInfo = styled.div`
 `
 const ProductImage = styled.div`
     img{
-        width: 750px;
-        height: 750px;
+        width: 30vw;
+        height: 60vh;
     }
 `
+

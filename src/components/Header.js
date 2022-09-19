@@ -1,11 +1,13 @@
 import { HeaderStyle, Button } from "../themes/themes";
 import { useState, useContext } from "react";
 import UserContext from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
 
     const [clicked, setClicked] = useState(false);
     const { cartItens, setCartItens} = useContext(UserContext);
+    const navigate = useNavigate();
     console.log(cartItens);
 
     function removeCartProduct(obj) {
@@ -19,7 +21,7 @@ export default function Header() {
     return (
         <HeaderStyle>
             <div>
-                <h2>Tech Store</h2>
+                <h2 onClick={() => navigate("/")}>Tech Store</h2>
 
                 <div>
                     <ion-icon name="search-outline"></ion-icon>
