@@ -1,119 +1,119 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {ThreeDots} from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 import { postSignUp } from "../../Service/api";
 
-export default function SignUp (){
+export default function SignUp() {
 
-    const [email,setEmail]= useState('');
-    const [password,setPassword]= useState('');
-    const [name,setName]= useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
-    const navigate=useNavigate();
-    const [isloading, setIsLoading] =useState (false)
+    const navigate = useNavigate();
+    const [isloading, setIsLoading] = useState(false)
     console.log("comecei ")
-    
 
 
-    function confirmLogin(e){
+
+    function confirmLogin(e) {
 
         e.preventDefault();
         setIsLoading(true)
-    
+
         const body = {
             email: email,
             name: name,
             password: password,
-            cpf:cpf
+            cpf: cpf
         }
-    
+
         postSignUp(body)
             .then(() => {
                 toast.success("Tudo certo, vamos la, Faça seu login :)!!");
-                setTimeout(()=>{
+                setTimeout(() => {
                     navigate('/sign-in');
-                },2000) 
+                }, 2000)
             })
             .catch((err) => {
                 setIsLoading(false)
                 console.error(err);
-                if(err.status == 409){
+                if (err.status == 409) {
                     toast.error("Email já está sendo utilizado :( - Tente outro :D")
-                } 
-    
+                }
+
             });
-    
+
         setEmail('');
         setName('');
         setPassword('');
         setCpf('');
     }
-    
-    
-        return (
-            <Page>
-                <ToastContainer/>
-                <TextTittle>
-                    <span>function</span>  techStore  <span>(cadastro)</span> 
-                </TextTittle>
-    
-                <FormPage>
-                    <form  onSubmit={confirmLogin}>
-                        <Data>  
-    
-                            <TextInput>
-                                <Input type="text" onChange={(e) => setName(e.target.value)}
-                                        value={name}
-                                        required
-                                        placeholder='nome'
-                                />
-                            </TextInput>  
-                            <TextInput>
-                                <Input type="email" onChange={(e) => setEmail(e.target.value)} 
-                                       value={email} 
-                                        required
-                                        placeholder='email'
-                                />
-                            </TextInput>
-                            <TextInput>
-                                <Input type="password" onChange={(e) => setPassword(e.target.value)}
-                                        value={password}
-                                        required
-                                        placeholder='senha'
-                                />
-                            </TextInput>
-    
-                            <TextInput>
-                                <Input type="text" onChange={(e) => setCpf(e.target.value)}
-                                        value={cpf}
-                                        required
-                                        placeholder='cpf'
-                                />
-                            </TextInput>
-                            
-                            {
-                                isloading?
-                                <Button> <ThreeDots color={'white'} height={30} width={30}/></Button>
+
+
+    return (
+        <Page>
+            <ToastContainer />
+            <TextTittle>
+                <span>function</span>  techStore  <span>(cadastro)</span>
+            </TextTittle>
+
+            <FormPage>
+                <form onSubmit={confirmLogin}>
+                    <Data>
+
+                        <TextInput>
+                            <Input type="text" onChange={(e) => setName(e.target.value)}
+                                value={name}
+                                required
+                                placeholder='nome'
+                            />
+                        </TextInput>
+                        <TextInput>
+                            <Input type="email" onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                required
+                                placeholder='email'
+                            />
+                        </TextInput>
+                        <TextInput>
+                            <Input type="password" onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                required
+                                placeholder='senha'
+                            />
+                        </TextInput>
+
+                        <TextInput>
+                            <Input type="text" onChange={(e) => setCpf(e.target.value)}
+                                value={cpf}
+                                required
+                                placeholder='cpf'
+                            />
+                        </TextInput>
+
+                        {
+                            isloading ?
+                                <Button> <ThreeDots color={'white'} height={30} width={30} /></Button>
                                 :
                                 <Button> <p>Cadastrar</p></Button>
-                            }
-                        
-                            <Link to="/sign-in">
+                        }
+
+                        <Link to="/sign-in">
                             <TextSignup>Já tem uma conta? Faça login!</TextSignup>
-                            </Link>
-                        
-                        </Data>
-                    </form>
-                </FormPage>
-                </Page>
-    
-        )
-    }
-    
-    const Page = styled.div`
+                        </Link>
+
+                    </Data>
+                </form>
+            </FormPage>
+        </Page>
+
+    )
+}
+
+const Page = styled.div`
         width: 100%;
         height:100vh ;
         background: rgb(2,0,36);
@@ -123,11 +123,11 @@ export default function SignUp (){
         justify-content: center ;
         align-items: center;
     `;
-    
-    const FormPage = styled.div`
+
+const FormPage = styled.div`
     margin-top: 32.62px;
     `
-    const Input =  styled.input`
+const Input = styled.input`
     background: #001aff;
     box-shadow:inset 0 -4px 8px rgba(0,0,0,0.4) ;
     border: none;
@@ -147,15 +147,15 @@ export default function SignUp (){
 
     }
     `
-    const TextInput = styled.div `
+const TextInput = styled.div`
         margin-bottom: 12px ;
     
     `
-    const Data = styled.div`
+const Data = styled.div`
     
     
     `
-    const Button = styled.button`
+const Button = styled.button`
     background: #020024;
     border-radius: 4.63636px;
     width: 303px ;
@@ -176,7 +176,7 @@ export default function SignUp (){
     }
     
     `
-    const TextSignup = styled.div` 
+const TextSignup = styled.div` 
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;
@@ -188,7 +188,7 @@ export default function SignUp (){
     outline: #0000;
     color: #FFFF ;
     `
-    const TextTittle = styled.div` 
+const TextTittle = styled.div` 
         font-family: 'Michroma', sans-serif;
         font-size: 32px;
         font-weight: 400;
