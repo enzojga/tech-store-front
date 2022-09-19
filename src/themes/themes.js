@@ -120,8 +120,8 @@ const Content = styled.div`
     align-items: center;
     position: relative;
     img{
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
     }
 `
 const Button = styled.div`
@@ -175,8 +175,8 @@ const ProductInfo = styled.div`
 `
 const ProductImage = styled.div`
     img{
-        max-width: 2px;
-        max-height: 2px;
+        max-width: 5100px;
+        max-height: 5100px;
     }
 `
 const BigButton = styled.div`
